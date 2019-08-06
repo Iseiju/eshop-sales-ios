@@ -71,6 +71,7 @@ class GameInfoController: UIViewController {
     guard let price = viewModel?.price else { return }
     guard let salePrice = viewModel?.salePrice else { return }
     priceLabel.attributedText = "$\(price)".strikeOutText()
+    salePriceLabel.textColor = .orange
     salePriceLabel.text = "$\(salePrice)"
     
     toEshopButton.layer.cornerRadius = 8.0

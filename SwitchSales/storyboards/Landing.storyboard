@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-launch" translatesAutoresizingMaskIntoConstraints="NO" id="7xU-aI-3yc">
-                                <rect key="frame" x="147" y="308" width="120" height="120"/>
+                                <rect key="frame" x="143" y="304" width="128" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="64c-je-wb9"/>
-                                    <constraint firstAttribute="width" constant="120" id="MHq-EP-cJz"/>
+                                    <constraint firstAttribute="height" constant="128" id="1s4-AR-nVa"/>
+                                    <constraint firstAttribute="width" constant="128" id="NWL-Qo-whQ"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -40,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic-launch" width="300" height="300"/>
+        <image name="ic-launch" width="200" height="272"/>
     </resources>
 </document>

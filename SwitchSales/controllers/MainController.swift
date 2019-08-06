@@ -15,6 +15,7 @@ protocol MainDelegate {
   func didTapGame(forIndexPath indexPath: IndexPath,
                   viewModel: GameViewModel,
                   navController: UINavigationController)
+  func toSearchGame(navController: UINavigationController)
 }
 
 class MainController: UIViewController {
@@ -54,6 +55,11 @@ class MainController: UIViewController {
     tableView.statefulDelegate = self
 
     tableView.triggerInitialLoad()
+  }
+  
+  @IBAction func didTapSearch(_ sender: Any) {
+    guard let navController = self.navigationController else { return }
+    delegate?.toSearchGame(navController: navController)
   }
 }
 

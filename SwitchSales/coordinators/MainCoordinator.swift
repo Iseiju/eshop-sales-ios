@@ -36,4 +36,9 @@ extension MainCoordinator: MainDelegate {
     
     gameInfoCoordinator.pushGameInfo(forViewModel: gameInfoViewModel)
   }
+  
+  func toSearchGame(navController: UINavigationController) {
+    let searchGameCoordinator = SearchGameCoordinator(navController)
+    searchGameCoordinator.presentSearch()
+  }
 }
