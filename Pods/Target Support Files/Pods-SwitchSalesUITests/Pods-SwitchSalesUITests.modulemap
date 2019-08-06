@@ -1,0 +1,6 @@
+framework module Pods_SwitchSalesUITests {
+  umbrella header "Pods-SwitchSalesUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
