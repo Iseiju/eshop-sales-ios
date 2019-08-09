@@ -10,8 +10,6 @@
 		510F20B8E55D4386D3721EF4 /* Pods_SwitchSalesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABD3655C3129961EC5829A1 /* Pods_SwitchSalesUITests.framework */; };
 		C9CF03F8189FAB1654BD582F /* Pods_SwitchSales.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BDC9CD8AF3FB6EEC5AEE89 /* Pods_SwitchSales.framework */; };
 		CF22E4551FEB98EEA5692978 /* Pods_SwitchSalesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEECE009D409E248E5AA66AC /* Pods_SwitchSalesTests.framework */; };
-		E80A54BB22F95559006C23A3 /* SearchGameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80A54BA22F95559006C23A3 /* SearchGameCoordinator.swift */; };
-		E80EA10E22F951BD000DB01F /* SearchGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80EA10D22F951BD000DB01F /* SearchGameController.swift */; };
 		E8BC6EC522F917DE003B2E19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC6EC422F917DE003B2E19 /* AppDelegate.swift */; };
 		E8BC6EDA22F917DE003B2E19 /* SwitchSalesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC6ED922F917DE003B2E19 /* SwitchSalesTests.swift */; };
 		E8BC6EE522F917DE003B2E19 /* SwitchSalesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC6EE422F917DE003B2E19 /* SwitchSalesUITests.swift */; };
@@ -67,8 +65,6 @@
 		808C7A59477C5295CCE6C92B /* Pods-SwitchSales.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwitchSales.debug.xcconfig"; path = "Target Support Files/Pods-SwitchSales/Pods-SwitchSales.debug.xcconfig"; sourceTree = "<group>"; };
 		D6BDC9CD8AF3FB6EEC5AEE89 /* Pods_SwitchSales.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwitchSales.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DECBD655C0E8C5EB022F44D7 /* Pods-SwitchSalesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwitchSalesTests.release.xcconfig"; path = "Target Support Files/Pods-SwitchSalesTests/Pods-SwitchSalesTests.release.xcconfig"; sourceTree = "<group>"; };
-		E80A54BA22F95559006C23A3 /* SearchGameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameCoordinator.swift; sourceTree = "<group>"; };
-		E80EA10D22F951BD000DB01F /* SearchGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameController.swift; sourceTree = "<group>"; };
 		E8BC6EC122F917DE003B2E19 /* SwitchSales.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwitchSales.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8BC6EC422F917DE003B2E19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8BC6ED022F917DE003B2E19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -223,7 +219,6 @@
 				E8BC6EF322F91969003B2E19 /* LandingController.swift */,
 				E8BC6EF422F91969003B2E19 /* GameInfoController.swift */,
 				E8BC6EF522F91969003B2E19 /* MainController.swift */,
-				E80EA10D22F951BD000DB01F /* SearchGameController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -295,7 +290,6 @@
 			children = (
 				E8BC6F0D22F91969003B2E19 /* GameInfoCoordinator.swift */,
 				E8BC6F0E22F91969003B2E19 /* MainCoordinator.swift */,
-				E80A54BA22F95559006C23A3 /* SearchGameCoordinator.swift */,
 			);
 			path = coordinators;
 			sourceTree = "<group>";
@@ -558,10 +552,8 @@
 				E8BC6F1C22F91969003B2E19 /* DataEnvelope.swift in Sources */,
 				E8BC6F1D22F91969003B2E19 /* UIView.swift in Sources */,
 				E8BC6F1222F91969003B2E19 /* GameCell.swift in Sources */,
-				E80A54BB22F95559006C23A3 /* SearchGameCoordinator.swift in Sources */,
 				E8BC6F1422F91969003B2E19 /* Game.swift in Sources */,
 				E8BC6F1122F91969003B2E19 /* MainController.swift in Sources */,
-				E80EA10E22F951BD000DB01F /* SearchGameController.swift in Sources */,
 				E8BC6F1622F91969003B2E19 /* GameInfoViewModel.swift in Sources */,
 				E8BC6F1F22F91969003B2E19 /* GameInfoCoordinator.swift in Sources */,
 				E8BC6F1022F91969003B2E19 /* GameInfoController.swift in Sources */,

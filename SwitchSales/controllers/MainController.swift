@@ -15,7 +15,7 @@ protocol MainDelegate {
   func didTapGame(forIndexPath indexPath: IndexPath,
                   viewModel: GameViewModel,
                   navController: UINavigationController)
-  func toSearchGame(navController: UINavigationController)
+//  func toSearchGame(navController: UINavigationController)
 }
 
 class MainController: UIViewController {
@@ -34,8 +34,24 @@ class MainController: UIViewController {
   }
   
   private func initViews() {
-    let textAttribute = [NSAttributedString.Key.foregroundColor: UIColor.orange,
-                         NSAttributedString.Key.font: UIFont(name: "GoogleSans-Bold", size: 16)]
+    var textAttribute: [NSAttributedString.Key : Optional<NSObject>] = [:]
+    
+    switch UIDevice.current.userInterfaceIdiom {
+    case .phone:
+      textAttribute = [NSAttributedString.Key.foregroundColor: UIColor.orange,
+                           NSAttributedString.Key.font: UIFont(name: "GoogleSans-Bold", size: 16)]
+    case .pad:
+      textAttribute = [NSAttributedString.Key.foregroundColor: UIColor.orange,
+                           NSAttributedString.Key.font: UIFont(name: "GoogleSans-Bold", size: 19)]
+    case .unspecified:
+      return
+    case .tv:
+      return
+    case .carPlay:
+      print(".carPlay")
+    @unknown default:
+      return
+    }
     
     navigationController?.navigationBar.titleTextAttributes = textAttribute
       as [NSAttributedString.Key : Any]
@@ -58,8 +74,10 @@ class MainController: UIViewController {
   }
   
   @IBAction func didTapSearch(_ sender: Any) {
-    guard let navController = self.navigationController else { return }
-    delegate?.toSearchGame(navController: navController)
+    let searchBar = UISearchBar()
+    searchBar.sizeToFit()
+
+//    delegate?.toSearchGame(navController: navController)
   }
 }
 

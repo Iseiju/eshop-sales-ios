@@ -21,8 +21,12 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-launch" translatesAutoresizingMaskIntoConstraints="NO" id="cAc-rS-Jod">
                                 <rect key="frame" x="96" y="220" width="128" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="QHc-o6-A4N"/>
-                                    <constraint firstAttribute="width" constant="128" id="hto-FB-Uvg"/>
+                                    <constraint firstAttribute="height" constant="128" id="QHc-o6-A4N">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="152"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="128" id="hto-FB-Uvg">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="152"/>
+                                    </constraint>
                                 </constraints>
                             </imageView>
                         </subviews>

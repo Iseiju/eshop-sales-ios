@@ -75,8 +75,12 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qvD-bY-Ycz">
                                                         <rect key="frame" x="8" y="8" width="84" height="84"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="84" id="7Oi-yf-fFs"/>
-                                                            <constraint firstAttribute="width" constant="84" id="Nvm-UX-lol"/>
+                                                            <constraint firstAttribute="height" constant="84" id="7Oi-yf-fFs">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                                                            </constraint>
+                                                            <constraint firstAttribute="width" constant="84" id="Nvm-UX-lol">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                                                            </constraint>
                                                         </constraints>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBf-9c-771">
@@ -87,18 +91,27 @@
                                                                 <fontDescription key="fontDescription" name="GoogleSans-Bold" family="Google Sans" pointSize="17"/>
                                                                 <color key="textColor" red="0.1450980392" green="0.46274509800000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" name="GoogleSans-Bold" family="Google Sans" pointSize="20"/>
+                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQh-cn-9Rl">
                                                                 <rect key="frame" x="0.0" y="21.666666666666671" width="41.666666666666664" height="20.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="GoogleSans-Bold" family="Google Sans" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" name="GoogleSans-Bold" family="Google Sans" pointSize="19"/>
+                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLx-T7-aKR">
                                                                 <rect key="frame" x="45.666666666666657" y="21.666666666666671" width="38.666666666666657" height="20.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="19"/>
+                                                                </variation>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -130,12 +143,17 @@
                                                 <rect key="frame" x="16" y="128" width="382" height="36"/>
                                                 <color key="backgroundColor" red="0.1450980392" green="0.46274509800000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="Pu6-hO-CLk"/>
+                                                    <constraint firstAttribute="height" constant="36" id="Pu6-hO-CLk">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                    </constraint>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="GoogleSans-Bold" family="Google Sans" pointSize="17"/>
                                                 <state key="normal" title="Go to eShop">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="GoogleSans-Bold" family="Google Sans" pointSize="20"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="didTapShop:" destination="mjD-GI-M2L" eventType="touchUpInside" id="28i-vN-9VD"/>
                                                 </connections>
@@ -145,6 +163,9 @@
                                                 <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="16"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="18"/>
+                                                </variation>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70G-sW-9Vh">
                                                 <rect key="frame" x="12" y="208.66666666666666" width="390" height="1"/>
@@ -164,26 +185,39 @@
                                                                 <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="18"/>
+                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMh-eg-SRc">
                                                                 <rect key="frame" x="0.0" y="20.666666666666657" width="298" height="20.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="18"/>
+                                                                </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBs-ES-Uk8">
                                                                 <rect key="frame" x="0.0" y="41.333333333333343" width="298" height="20.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="16"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" name="GoogleSans-Regular" family="Google Sans" pointSize="18"/>
+                                                                </variation>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ewM-Ul-a0a">
                                                         <rect key="frame" x="310" y="-3" width="64" height="84"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="84" id="8Ck-dU-GQK"/>
-                                                            <constraint firstAttribute="width" constant="64" id="kMZ-eD-FM5"/>
+                                                            <constraint firstAttribute="height" constant="84" id="8Ck-dU-GQK">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                                                            </constraint>
+                                                            <constraint firstAttribute="width" constant="64" id="kMZ-eD-FM5">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="76"/>
+                                                            </constraint>
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
@@ -256,43 +290,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RLs-nb-YKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1757.9710144927537" y="23.64130434782609"/>
-        </scene>
-        <!--Search-->
-        <scene sceneID="SBP-ZZ-TXH">
-            <objects>
-                <viewController storyboardIdentifier="SearchGameController" id="bu3-Hp-PCy" customClass="SearchGameController" customModule="SwitchSales" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BTD-D7-pAh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SPV-TK-e0k">
-                                <rect key="frame" x="0.0" y="66" width="414" height="670"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fIX-cH-aO2">
-                                <rect key="frame" x="12" y="28" width="390" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="fIX-cH-aO2" firstAttribute="leading" secondItem="Wce-q3-WHM" secondAttribute="leading" constant="12" id="ADa-df-5ce"/>
-                            <constraint firstItem="SPV-TK-e0k" firstAttribute="top" secondItem="fIX-cH-aO2" secondAttribute="bottom" constant="8" id="GNZ-pI-Cba"/>
-                            <constraint firstItem="SPV-TK-e0k" firstAttribute="leading" secondItem="Wce-q3-WHM" secondAttribute="leading" id="JMP-UV-Guh"/>
-                            <constraint firstItem="Wce-q3-WHM" firstAttribute="trailing" secondItem="fIX-cH-aO2" secondAttribute="trailing" constant="12" id="QiH-Sh-jKk"/>
-                            <constraint firstItem="Wce-q3-WHM" firstAttribute="trailing" secondItem="SPV-TK-e0k" secondAttribute="trailing" id="TXH-mm-wIe"/>
-                            <constraint firstItem="Wce-q3-WHM" firstAttribute="bottom" secondItem="SPV-TK-e0k" secondAttribute="bottom" id="ibg-7f-O16"/>
-                            <constraint firstItem="fIX-cH-aO2" firstAttribute="top" secondItem="Wce-q3-WHM" secondAttribute="top" constant="8" id="l3z-td-d8p"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Wce-q3-WHM"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Search" id="tZ6-0u-zSB"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="00f-Sq-HIG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="953.62318840579712" y="-668.47826086956525"/>
         </scene>
     </scenes>
 </document>
