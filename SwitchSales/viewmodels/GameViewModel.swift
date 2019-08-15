@@ -25,8 +25,8 @@ class GameViewModel {
   }
 
   func getGamesOnSale(controller: MainController,tableView: StatefulTableView, onCompletion completion: @escaping (_ isEmpty: Bool, _ errorOrNil: NSError?) -> Void) {
-    let url = "https://switchsales.herokuapp.com/eshop-sales"
-    let localhost = "http://localhost:3000/eshop-sales"
+    let url = "https://switchsales.herokuapp.com/games/eshop-sales"
+    let localhost = "http://localhost:3000/games/eshop-sales"
     
     Alamofire.request(url, method: .get, encoding: URLEncoding.default).responseData { response in
       guard case .success = response.result else {
