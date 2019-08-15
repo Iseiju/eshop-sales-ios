@@ -10,6 +10,7 @@ import Foundation
 
 struct Game: Codable {
   
+  var id: Int
   var url: String
   var title: String
   var description: String

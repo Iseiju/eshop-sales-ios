@@ -26,6 +26,7 @@ class GameViewModel {
 
   func getGamesOnSale(controller: MainController,tableView: StatefulTableView, onCompletion completion: @escaping (_ isEmpty: Bool, _ errorOrNil: NSError?) -> Void) {
     let url = "https://switchsales.herokuapp.com/eshop-sales"
+    let localhost = "http://localhost:3000/eshop-sales"
     
     Alamofire.request(url, method: .get, encoding: URLEncoding.default).responseData { response in
       guard case .success = response.result else {
@@ -39,7 +40,14 @@ class GameViewModel {
         completion(data.isEmpty, nil)
         return
       }
-      self.gameList = response.data
+      
+      var games = response.data
+
+      games.sort {
+        return $0.title < $1.title
+      }
+      
+      self.gameList = games
       tableView.reloadData()
       completion(response.data.isEmpty, nil)
     }
