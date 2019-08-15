@@ -24,7 +24,7 @@ class GameViewModel {
     return cellViewModels
   }
 
-  func getGamesOnSale(tableView: StatefulTableView, onCompletion completion: @escaping (_ isEmpty: Bool, _ errorOrNil: NSError?) -> Void) {
+  func getGamesOnSale(controller: MainController,tableView: StatefulTableView, onCompletion completion: @escaping (_ isEmpty: Bool, _ errorOrNil: NSError?) -> Void) {
     let url = "https://switchsales.herokuapp.com/eshop-sales"
     
     Alamofire.request(url, method: .get, encoding: URLEncoding.default).responseData { response in
@@ -34,7 +34,11 @@ class GameViewModel {
         return
       }
       guard let data = response.result.value else { return }
-      guard let response = try? JSONDecoder().decode(DataEnvelope<[Game]>.self, from: data) else { return }
+      guard let response = try? JSONDecoder().decode(DataEnvelope<[Game]>.self, from: data) else {
+        controller.presentAlert()
+        completion(data.isEmpty, nil)
+        return
+      }
       self.gameList = response.data
       tableView.reloadData()
       completion(response.data.isEmpty, nil)

@@ -73,6 +73,16 @@ class MainController: UIViewController {
     tableView.triggerInitialLoad()
   }
   
+  func presentAlert() {
+    let alertController = UIAlertController(title: "There was a problem connecting to the server",
+                                            message: nil,
+                                            preferredStyle: .alert)
+    let ok = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+    alertController.addAction(ok)
+
+    self.present(alertController, animated: true, completion: nil)
+  }
+  
   @IBAction func didTapSearch(_ sender: Any) {
     let searchBar = UISearchBar()
     searchBar.sizeToFit()
@@ -90,7 +100,7 @@ extension MainController: StatefulTableDelegate {
   
   func statefulTable(_ tableView: StatefulTableView,
                      pullToRefreshCompletion completion: @escaping InitialLoadCompletion) {
-    self.viewModel.getGamesOnSale(tableView: tableView, onCompletion: completion)
+    self.viewModel.getGamesOnSale(controller: self, tableView: tableView, onCompletion: completion)
   }
   
   func statefulTable(_ tableView: StatefulTableView,
