@@ -29,27 +29,28 @@ class GameViewModel {
     let localhost = "http://localhost:3000/games/eshop-sales"
     
     Alamofire.request(url, method: .get, encoding: URLEncoding.default).responseData { response in
-      guard case .success = response.result else {
-        let error = response.result.error! as NSError
-        completion(true, error)
-        return
-      }
-      guard let data = response.result.value else { return }
-      guard let response = try? JSONDecoder().decode(DataEnvelope<[Game]>.self, from: data) else {
-        controller.presentAlert()
+      switch response.result {
+      case .success:
+        guard let data = response.result.value else { return }
+        guard let response = try? JSONDecoder().decode(DataEnvelope<[Game]>.self, from: data) else {
+          completion(true, nil)
+          return
+        }
+        
+        var games = response.data
+        
+        games.sort {
+          return $0.title < $1.title
+        }
+        
+        self.gameList = games
+        tableView.reloadData()
         completion(data.isEmpty, nil)
-        return
+        
+      case .failure(let error):
+        let nserror = error as NSError
+        completion(true, nserror)
       }
-      
-      var games = response.data
-
-      games.sort {
-        return $0.title < $1.title
-      }
-      
-      self.gameList = games
-      tableView.reloadData()
-      completion(response.data.isEmpty, nil)
     }
   }
 }

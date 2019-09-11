@@ -10,7 +10,7 @@ target 'SwitchSales' do
   pod 'AlamofireImage', '~> 3.5'
   pod 'MaterialComponents/Cards', '~> 85.8.0'
   pod 'MaterialComponents/Ink', '~> 85.8.0'
-  pod 'StatefulTableView', :git => 'https://github.com/iomusashi/StatefulTableView.git', :commit => '2c09da3'
+  pod 'StatefulTableView', :git => 'https://github.com/Ninarciso/StatefulTableView.git', :commit => '9e1a92b'
 
   target 'SwitchSalesTests' do
     inherit! :search_paths

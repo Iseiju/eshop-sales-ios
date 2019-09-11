@@ -73,16 +73,6 @@ class MainController: UIViewController {
     tableView.triggerInitialLoad()
   }
   
-  func presentAlert() {
-    let alertController = UIAlertController(title: "There was a problem connecting to the server",
-                                            message: nil,
-                                            preferredStyle: .alert)
-    let ok = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
-    alertController.addAction(ok)
-
-    self.present(alertController, animated: true, completion: nil)
-  }
-  
   @IBAction func didTapSearch(_ sender: Any) {
     let searchBar = UISearchBar()
     searchBar.sizeToFit()
@@ -106,6 +96,14 @@ extension MainController: StatefulTableDelegate {
   func statefulTable(_ tableView: StatefulTableView,
                      loadMoreCompletion completion: @escaping LoadMoreCompletion) {
     completion(false, nil, false)
+  }
+  
+  func statefulTable(_ tableView: StatefulTableView,
+                     initialLoadWithError errorOrNil: NSError?,
+                     errorView: InitialLoadErrorView) -> UIView? {
+    errorView.labelText = "Something went wrong"
+    errorView.shouldShowRetryButton = true
+    return errorView
   }
 }
 

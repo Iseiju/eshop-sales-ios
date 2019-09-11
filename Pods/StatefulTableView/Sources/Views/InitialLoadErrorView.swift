@@ -20,9 +20,15 @@ public protocol InitialLoadErrorViewDelegate {
 public class InitialLoadErrorView: UIView {
 
   public var error: NSError? = nil
-  public var label: UILabel? = nil
-  public var button: UIButton? = nil
+  
+  public var labelText: String? = nil
+  public var buttonTitle: String? = nil
+  
+  var label: UILabel? = nil
+  var button: UIButton? = nil
   public var delegate: InitialLoadErrorViewDelegate? = nil
+  
+  public var shouldShowRetryButton: Bool = false
   
   // MARK: Constructors
   public convenience init(error: NSError?, delegate: InitialLoadErrorViewDelegate?) {
@@ -57,7 +63,7 @@ public class InitialLoadErrorView: UIView {
     centeredSize.width = label.bounds.width
     centeredSize.height = label.bounds.height
     
-    if let _ = error {
+    if error != nil || shouldShowRetryButton {
       let button = constrainedButton()
       centeredSize.width = max(centeredSize.width, button.bounds.width)
       centeredSize.height = label.bounds.height + button.bounds.height + 5
@@ -90,7 +96,9 @@ public class InitialLoadErrorView: UIView {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textAlignment = .center
-    label.text = error?.localizedDescription ?? "No items founds."
+    label.text = error?.localizedDescription ??
+      labelText ??
+      "No items founds."
     label.sizeToFit()
     label.setWidthConstraintToCurrent()
     label.setHeightConstraintToCurrent()
@@ -100,7 +108,11 @@ public class InitialLoadErrorView: UIView {
   fileprivate func constrainedButton() -> UIButton {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle("Try Again", for: UIControl.State())
+    if let buttonTitle = buttonTitle {
+      button.setTitle(buttonTitle, for: UIControl.State())
+    } else {
+      button.setTitle("Try Again", for: UIControl.State())
+    }
     button.addTarget(self, action: #selector(didTapErrorButton(_:)), for: .touchUpInside)
     button.sizeToFit()
     

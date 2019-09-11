@@ -32,7 +32,7 @@ DEPENDENCIES:
   - AlamofireImage (~> 3.5)
   - MaterialComponents/Cards (~> 85.8.0)
   - MaterialComponents/Ink (~> 85.8.0)
-  - StatefulTableView (from `https://github.com/iomusashi/StatefulTableView.git`, commit `2c09da3`)
+  - StatefulTableView (from `https://github.com/Ninarciso/StatefulTableView.git`, commit `9e1a92b`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -42,13 +42,13 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   StatefulTableView:
-    :commit: 2c09da3
-    :git: https://github.com/iomusashi/StatefulTableView.git
+    :commit: 9e1a92b
+    :git: https://github.com/Ninarciso/StatefulTableView.git
 
 CHECKOUT OPTIONS:
   StatefulTableView:
-    :commit: 2c09da3
-    :git: https://github.com/iomusashi/StatefulTableView.git
+    :commit: 9e1a92b
+    :git: https://github.com/Ninarciso/StatefulTableView.git
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -56,6 +56,6 @@ SPEC CHECKSUMS:
   MaterialComponents: d3c6936b52687041650c99d2298d16fb2767f97a
   StatefulTableView: cc874bfeb85db4c2d7ccdcd6d507eb17186b2aa2
 
-PODFILE CHECKSUM: 1b2257a2595e67056bca91ea2032f3a2fb414036
+PODFILE CHECKSUM: e22433b87fbcf3ae9a52d4c0d1d63441c16ffea4
 
 COCOAPODS: 1.7.5
