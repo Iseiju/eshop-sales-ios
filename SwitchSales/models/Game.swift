@@ -18,7 +18,7 @@ struct Game: Codable {
   var releaseDate: String
   var categories: [String]
   var esrb: String
-  var company: [String]
+  var company: [String?]
   var availability: [String]
   var price: Double
   var salePrice: Double
