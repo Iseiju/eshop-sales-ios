@@ -23,6 +23,9 @@ class MainCoordinator {
     mainController.delegate = self
     
     let navController = UINavigationController(rootViewController: mainController)
+    
+    navController.modalPresentationStyle = .fullScreen
+    
     presentingViewController?.present(navController, animated: true, completion: nil)
   }
 }
