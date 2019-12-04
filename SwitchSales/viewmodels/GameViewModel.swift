@@ -8,23 +8,46 @@
 
 import Alamofire
 import Foundation
+import RxCocoa
+import RxSwift
 import StatefulTableView
 
 class GameViewModel {
   
-  var gameList: [Game] = []
+  private let disposeBag = DisposeBag()
   
-  var count: Int {
-    return self.gameList.count
-  }
-
-  func cellViewModels(forIndexPath indexPath: IndexPath) -> GameCellViewModel {
-    let cellViewModels = GameCellViewModel(game: self.gameList[indexPath.row])
+  var gameList = BehaviorRelay<[Game]>(value: [])
+  
+  private let cellRelay = BehaviorRelay<[GameCellViewModel]>(value: [])
+  
+  func cellViewModels() -> BehaviorRelay<[GameCellViewModel]> {
+    gameList.asObservable().subscribe(onNext: { games in
+      let cellViewModel = games.map { game in
+        return GameCellViewModel(game: game)
+      }
+      self.cellRelay.accept(cellViewModel)
+    }).disposed(by: disposeBag)
     
-    return cellViewModels
+    return cellRelay
+  }
+  
+  func search(forQuery query: String) {
+    guard !query.isEmpty else {
+      let cellViewModel = gameList.value.map { GameCellViewModel(game: $0) }
+      cellRelay.accept(cellViewModel)
+      return
+    }
+    
+    let cellViewModel = gameList.value.filter { game in
+      return game.title.lowercased().contains(query.lowercased())
+    }.map {
+      return GameCellViewModel(game: $0)
+    }
+
+    cellRelay.accept(cellViewModel)
   }
 
-  func getGamesOnSale(controller: MainController,tableView: StatefulTableView, onCompletion completion: @escaping (_ isEmpty: Bool, _ errorOrNil: NSError?) -> Void) {
+  func getGamesOnSale(tableView: StatefulTableView, onCompletion completion: @escaping (_ isEmpty: Bool, _ errorOrNil: NSError?) -> Void) {
     let url = "https://switchsales.herokuapp.com/games/eshop-sales"
     let localhost = "http://localhost:3000/games/eshop-sales"
     
@@ -43,7 +66,7 @@ class GameViewModel {
           return $0.title < $1.title
         }
         
-        self.gameList = games
+        self.gameList.accept(games)
         tableView.reloadData()
         completion(data.isEmpty, nil)
         

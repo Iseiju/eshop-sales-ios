@@ -12,6 +12,7 @@ import UIKit
 protocol UIViewProtocol {
   
   func roundCorners(corners: UIRectCorner, radius: CGFloat)
+  func height(_ height: CGFloat) -> NSLayoutConstraint
 }
 
 extension UIView: UIViewProtocol {
@@ -23,5 +24,13 @@ extension UIView: UIViewProtocol {
     let mask = CAShapeLayer()
     mask.path = path.cgPath
     layer.mask = mask
+  }
+  
+  func height(_ height: CGFloat) -> NSLayoutConstraint {
+    self.translatesAutoresizingMaskIntoConstraints = false
+    let heightConstraint = self.heightAnchor.constraint(equalToConstant: height)
+    heightConstraint.isActive = true
+    self.updateConstraintsIfNeeded()
+    return heightConstraint
   }
 }

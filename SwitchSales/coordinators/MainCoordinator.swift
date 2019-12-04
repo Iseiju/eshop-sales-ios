@@ -19,7 +19,10 @@ class MainCoordinator {
   }
   
   func presentMain() {
+    let viewModel = GameViewModel()
+    
     let mainController = MainController.instantiate()
+    mainController.viewModel = viewModel
     mainController.delegate = self
     
     let navController = UINavigationController(rootViewController: mainController)
@@ -32,8 +35,12 @@ class MainCoordinator {
 
 extension MainCoordinator: MainDelegate {
 
-  func didTapGame(forIndexPath indexPath: IndexPath, viewModel: GameViewModel, navController: UINavigationController) {
-    let game = viewModel.gameList[indexPath.row]
+  func didTapGame(forIndexPath indexPath: IndexPath,
+                  viewModel: GameViewModel,
+                  controller: MainController) {
+    guard let navController = controller.navigationController else { return }
+    
+    let game = viewModel.gameList.value[indexPath.row]
     let gameInfoViewModel = GameInfoViewModel(game: game)
     let gameInfoCoordinator = GameInfoCoordinator(navController: navController)
     

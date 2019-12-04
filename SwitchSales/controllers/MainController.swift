@@ -8,22 +8,35 @@
 
 import Alamofire
 import StatefulTableView
+import RxCocoa
+import RxSwift
 import UIKit
 
 protocol MainDelegate {
   
   func didTapGame(forIndexPath indexPath: IndexPath,
                   viewModel: GameViewModel,
-                  navController: UINavigationController)
-//  func toSearchGame(navController: UINavigationController)
+                  controller: MainController)
 }
 
 class MainController: UIViewController {
   
-  var viewModel = GameViewModel()
+  let disposeBag = DisposeBag()
+  
+  var viewModel: GameViewModel? = nil
   
   var delegate: MainDelegate? = nil
-
+  
+  var isSearchBarHidden: Bool = true
+  
+  var searchBarHeight: CGFloat? = nil
+  
+  var searchBarHeightConstraint: NSLayoutConstraint? = nil
+  
+  @IBOutlet weak var searchBarView: UIView!
+  
+  @IBOutlet weak var searchTextField: UITextField!
+  
   @IBOutlet weak var tableView: StatefulTableView!
   
   override func viewDidLoad() {
@@ -31,9 +44,15 @@ class MainController: UIViewController {
     
     initViews()
     registerNib()
+    initObservables()
   }
   
   private func initViews() {
+    searchBarHeight = searchBarView.bounds.size.height
+    searchBarHeightConstraint = searchBarView.height(0)
+    
+    searchTextField.delegate = self
+
     var textAttribute: [NSAttributedString.Key : Optional<NSObject>] = [:]
     
     switch UIDevice.current.userInterfaceIdiom {
@@ -48,7 +67,7 @@ class MainController: UIViewController {
     case .tv:
       return
     case .carPlay:
-      print(".carPlay")
+      return
     @unknown default:
       return
     }
@@ -65,7 +84,6 @@ class MainController: UIViewController {
     tableView.separatorStyle = .none
 
     tableView.delegate = self
-    tableView.dataSource = self
     tableView.canLoadMore = false
     tableView.canPullToRefresh = true
     tableView.statefulDelegate = self
@@ -73,11 +91,55 @@ class MainController: UIViewController {
     tableView.triggerInitialLoad()
   }
   
+  private func initObservables() {
+    self
+      .searchTextField
+      .rx
+      .text
+      .asObservable()
+      .subscribe(onNext: { text in
+        guard let query = text else { return }
+        self.viewModel?.search(forQuery: query)
+    }).disposed(by: disposeBag)
+    
+    self
+      .viewModel?
+      .cellViewModels()
+      .bind(to: tableView.innerTable.rx.items(cellIdentifier: GameCell.cellIdentifier,
+                                              cellType: GameCell.self)) { index, cellViewModel, cell in
+                                                cell.initCell(cellViewModel: cellViewModel)
+    }.disposed(by: self.disposeBag)
+    
+    self
+      .tableView
+      .innerTable
+      .rx
+      .itemSelected
+      .subscribe(onNext: { index in
+        guard let viewModel = self.viewModel else { return }
+        self.delegate?.didTapGame(forIndexPath: index,
+                                  viewModel: viewModel,
+                                  controller: self)
+    }).disposed(by: disposeBag)
+  }
+  
   @IBAction func didTapSearch(_ sender: Any) {
-    let searchBar = UISearchBar()
-    searchBar.sizeToFit()
-
-//    delegate?.toSearchGame(navController: navController)
+    guard let searchBarHeight = self.searchBarHeight else { return }
+    
+    switch isSearchBarHidden {
+    case true:
+      UIView.animate(withDuration: 0.3) { [weak self] in
+        self?.searchBarHeightConstraint?.constant = searchBarHeight
+        self?.isSearchBarHidden = false
+        self?.view.layoutIfNeeded()
+      }
+    case false:
+      UIView.animate(withDuration: 0.3) { [weak self] in
+        self?.searchBarHeightConstraint?.constant = 0
+        self?.isSearchBarHidden = true
+        self?.view.layoutIfNeeded()
+      }
+    }
   }
 }
 
@@ -90,7 +152,7 @@ extension MainController: StatefulTableDelegate {
   
   func statefulTable(_ tableView: StatefulTableView,
                      pullToRefreshCompletion completion: @escaping InitialLoadCompletion) {
-    self.viewModel.getGamesOnSale(controller: self, tableView: tableView, onCompletion: completion)
+    self.viewModel?.getGamesOnSale(tableView: tableView, onCompletion: completion)
   }
   
   func statefulTable(_ tableView: StatefulTableView,
@@ -112,31 +174,13 @@ extension MainController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableView.automaticDimension
   }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let navController = self.navigationController else { return }
-    self.delegate?.didTapGame(forIndexPath: indexPath,
-                              viewModel: viewModel,
-                              navController: navController)
-  }
 }
 
-extension MainController: UITableViewDataSource {
-
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.viewModel.count
-  }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard indexPath.row < self.viewModel.count else { return UITableViewCell() }
-    let cell = tableView.dequeueReusableCell(withIdentifier: GameCell.cellIdentifier,
-                                             for: indexPath) as! GameCell
-    
-    let cellViewModel = self.viewModel.cellViewModels(forIndexPath: indexPath)
-    
-    cell.initCell(cellViewModel: cellViewModel)
-    return cell
-  }
+extension MainController: UITextFieldDelegate {
+  
+//  func textFieldDidBeginEditing(_ textField: UITextField) {
+//    <#code#>
+//  }
 }
 
 extension MainController: StoryboardInstantiable {
