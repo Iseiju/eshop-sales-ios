@@ -40,8 +40,16 @@ extension MainCoordinator: MainDelegate {
                   controller: MainController) {
     guard let navController = controller.navigationController else { return }
     
-    let game = viewModel.gameList.value[indexPath.row]
-    let gameInfoViewModel = GameInfoViewModel(game: game)
+    var game: Game? = nil
+    
+    if viewModel.filteredList.value.isEmpty {
+      game = viewModel.gameList.value[indexPath.row]
+    } else {
+      game = viewModel.filteredList.value[indexPath.row]
+    }
+
+    guard let selected = game else { return }
+    let gameInfoViewModel = GameInfoViewModel(game: selected)
     let gameInfoCoordinator = GameInfoCoordinator(navController: navController)
     
     gameInfoCoordinator.pushGameInfo(forViewModel: gameInfoViewModel)

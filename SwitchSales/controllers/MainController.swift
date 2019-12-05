@@ -50,8 +50,6 @@ class MainController: UIViewController {
   private func initViews() {
     searchBarHeight = searchBarView.bounds.size.height
     searchBarHeightConstraint = searchBarView.height(0)
-    
-    searchTextField.delegate = self
 
     var textAttribute: [NSAttributedString.Key : Optional<NSObject>] = [:]
     
@@ -71,7 +69,7 @@ class MainController: UIViewController {
     @unknown default:
       return
     }
-    
+
     navigationController?.navigationBar.titleTextAttributes = textAttribute
       as [NSAttributedString.Key : Any]
     navigationController?.navigationBar.tintColor = .orange
@@ -92,26 +90,14 @@ class MainController: UIViewController {
   }
   
   private func initObservables() {
-    self
-      .searchTextField
-      .rx
-      .text
-      .asObservable()
-      .subscribe(onNext: { text in
-        guard let query = text else { return }
-        self.viewModel?.search(forQuery: query)
-    }).disposed(by: disposeBag)
-    
-    self
-      .viewModel?
+    viewModel?
       .cellViewModels()
       .bind(to: tableView.innerTable.rx.items(cellIdentifier: GameCell.cellIdentifier,
                                               cellType: GameCell.self)) { index, cellViewModel, cell in
                                                 cell.initCell(cellViewModel: cellViewModel)
-    }.disposed(by: self.disposeBag)
+    }.disposed(by: disposeBag)
     
-    self
-      .tableView
+    tableView
       .innerTable
       .rx
       .itemSelected
@@ -120,6 +106,15 @@ class MainController: UIViewController {
         self.delegate?.didTapGame(forIndexPath: index,
                                   viewModel: viewModel,
                                   controller: self)
+    }).disposed(by: disposeBag)
+    
+    searchTextField
+      .rx
+      .text
+      .asObservable()
+      .subscribe(onNext: { text in
+        guard let query = text else { return }
+        self.viewModel?.search(forQuery: query)
     }).disposed(by: disposeBag)
   }
   
@@ -137,7 +132,9 @@ class MainController: UIViewController {
       UIView.animate(withDuration: 0.3) { [weak self] in
         self?.searchBarHeightConstraint?.constant = 0
         self?.isSearchBarHidden = true
+        self?.searchTextField.text = nil
         self?.view.layoutIfNeeded()
+        self?.view.endEditing(true)
       }
     }
   }
@@ -174,13 +171,6 @@ extension MainController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableView.automaticDimension
   }
-}
-
-extension MainController: UITextFieldDelegate {
-  
-//  func textFieldDidBeginEditing(_ textField: UITextField) {
-//    <#code#>
-//  }
 }
 
 extension MainController: StoryboardInstantiable {

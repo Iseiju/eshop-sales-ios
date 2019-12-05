@@ -14,9 +14,10 @@ import StatefulTableView
 
 class GameViewModel {
   
-  private let disposeBag = DisposeBag()
-  
+  var filteredList = BehaviorRelay<[Game]>(value: [])
   var gameList = BehaviorRelay<[Game]>(value: [])
+  
+  private let disposeBag = DisposeBag()
   
   private let cellRelay = BehaviorRelay<[GameCellViewModel]>(value: [])
   
@@ -25,6 +26,7 @@ class GameViewModel {
       let cellViewModel = games.map { game in
         return GameCellViewModel(game: game)
       }
+
       self.cellRelay.accept(cellViewModel)
     }).disposed(by: disposeBag)
     
@@ -38,18 +40,22 @@ class GameViewModel {
       return
     }
     
-    let cellViewModel = gameList.value.filter { game in
+    let games = gameList.value.filter { game in
       return game.title.lowercased().contains(query.lowercased())
-    }.map {
+    }
+    
+    filteredList.accept(games)
+    
+    let cellViewModels = games.map {
       return GameCellViewModel(game: $0)
     }
 
-    cellRelay.accept(cellViewModel)
+    cellRelay.accept(cellViewModels)
   }
 
   func getGamesOnSale(tableView: StatefulTableView, onCompletion completion: @escaping (_ isEmpty: Bool, _ errorOrNil: NSError?) -> Void) {
     let url = "https://switchsales.herokuapp.com/games/eshop-sales"
-    let localhost = "http://localhost:3000/games/eshop-sales"
+//    let localhost = "http://localhost:3000/games/eshop-sales"
     
     Alamofire.request(url, method: .get, encoding: URLEncoding.default).responseData { response in
       switch response.result {
