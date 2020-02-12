@@ -15,11 +15,6 @@ class GameCell: UITableViewCell {
   
   var cellViewModel: GameCellViewModel? = nil
   
-  var title: String? = nil
-  var price: Double? = nil
-  var salePrice: Double? = nil
-  
-  let placeholder = UIImage(named: "ic-placeholder")
   var inkTouchController: MDCInkTouchController!
   
   static var cellIdentifier = String(describing: GameCell.self)
@@ -52,14 +47,15 @@ class GameCell: UITableViewCell {
   func initCell(cellViewModel: GameCellViewModel) {
     self.cellViewModel = cellViewModel
     
-    self.titleLabel.text = self.cellViewModel?.title
+    let placeholder = UIImage(named: "ic-placeholder")
     
     guard let url = URL(string: self.cellViewModel?.boxArt ?? "") else { return }
     self.boxArtImageView.af_setImage(withURL: url,
                                      placeholderImage: placeholder,
                                      imageTransition: .crossDissolve(0.2))
     
-    self.priceLabel.attributedText = "$\(cellViewModel.price)".strikeOutText()
+    self.titleLabel.text = self.cellViewModel?.title
+    self.priceLabel.attributedText = "$\(self.cellViewModel?.price ?? 0.0)".strikeOutText()
     self.salePriceLabel.text = "$\(self.cellViewModel?.salePrice ?? 0.0)"
     self.salePriceLabel.textColor = .orange
   }

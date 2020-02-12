@@ -100,6 +100,7 @@ class MainController: UIViewController {
       .rx
       .itemSelected
       .subscribe(onNext: { index in
+        self.searchTextField.resignFirstResponder()
         self.delegate?.didTapGame(forIndexPath: index, controller: self)
     }).disposed(by: disposeBag)
     
@@ -115,6 +116,8 @@ class MainController: UIViewController {
   
   @IBAction func didTapSearch(_ sender: Any) {
     guard let searchBarHeight = self.searchBarHeight else { return }
+    
+    searchTextField.becomeFirstResponder()
     
     switch isSearchBarHidden {
     case true:
