@@ -55,7 +55,9 @@ class GameCell: UITableViewCell {
     self.titleLabel.text = self.cellViewModel?.title
     
     guard let url = URL(string: self.cellViewModel?.boxArt ?? "") else { return }
-    self.boxArtImageView.af_setImage(withURL: url, placeholderImage: placeholder)
+    self.boxArtImageView.af_setImage(withURL: url,
+                                     placeholderImage: placeholder,
+                                     imageTransition: .crossDissolve(0.2))
     
     self.priceLabel.attributedText = "$\(cellViewModel.price)".strikeOutText()
     self.salePriceLabel.text = "$\(self.cellViewModel?.salePrice ?? 0.0)"

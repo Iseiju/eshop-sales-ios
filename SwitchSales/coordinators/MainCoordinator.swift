@@ -11,6 +11,8 @@ import UIKit
 
 class MainCoordinator {
   
+  var viewModel = GameViewModel()
+  
   var presentingViewController: UIViewController? = nil
   
   convenience init(presentingViewController: UIViewController) {
@@ -19,8 +21,6 @@ class MainCoordinator {
   }
   
   func presentMain() {
-    let viewModel = GameViewModel()
-    
     let mainController = MainController.instantiate()
     mainController.viewModel = viewModel
     mainController.delegate = self
@@ -33,23 +33,17 @@ class MainCoordinator {
   }
 }
 
-extension MainCoordinator: MainDelegate {
+extension MainCoordinator: MainControllerDelegate {
 
-  func didTapGame(forIndexPath indexPath: IndexPath,
-                  viewModel: GameViewModel,
-                  controller: MainController) {
+  func didTapGame(forIndexPath indexPath: IndexPath, controller: MainController) {
     guard let navController = controller.navigationController else { return }
-    
-    var game: Game? = nil
-    
-    if viewModel.filteredList.value.isEmpty {
-      game = viewModel.gameList.value[indexPath.row]
-    } else {
-      game = viewModel.filteredList.value[indexPath.row]
-    }
 
-    guard let selected = game else { return }
-    let gameInfoViewModel = GameInfoViewModel(game: selected)
+    let gameList = viewModel.gameList.value
+    let filteredList = viewModel.filteredList.value
+    
+    let selectedGame = filteredList.isEmpty ? gameList[indexPath.row] : filteredList[indexPath.row]
+
+    let gameInfoViewModel = GameInfoViewModel(game: selectedGame)
     let gameInfoCoordinator = GameInfoCoordinator(navController: navController)
     
     gameInfoCoordinator.pushGameInfo(forViewModel: gameInfoViewModel)

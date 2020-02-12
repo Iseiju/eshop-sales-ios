@@ -14,8 +14,8 @@ import StatefulTableView
 
 class GameViewModel {
   
-  var filteredList = BehaviorRelay<[Game]>(value: [])
   var gameList = BehaviorRelay<[Game]>(value: [])
+  var filteredList = BehaviorRelay<[Game]>(value: [])
   
   private let disposeBag = DisposeBag()
   
@@ -35,25 +35,26 @@ class GameViewModel {
   
   func search(forQuery query: String) {
     guard !query.isEmpty else {
-      let cellViewModel = gameList.value.map { GameCellViewModel(game: $0) }
-      cellRelay.accept(cellViewModel)
+      let cellViewModels = gameList.value.map { GameCellViewModel(game: $0) }
+      self.filteredList.accept([])
+      cellRelay.accept(cellViewModels)
       return
     }
     
-    let games = gameList.value.filter { game in
+    let filteredGames = gameList.value.filter { game in
       return game.title.lowercased().contains(query.lowercased())
     }
     
-    filteredList.accept(games)
+    filteredList.accept(filteredGames)
     
-    let cellViewModels = games.map {
+    let filteredCellViewModels = filteredGames.map {
       return GameCellViewModel(game: $0)
     }
 
-    cellRelay.accept(cellViewModels)
+    cellRelay.accept(filteredCellViewModels)
   }
 
-  func getGamesOnSale(tableView: StatefulTableView, onCompletion completion: @escaping (_ isEmpty: Bool, _ errorOrNil: NSError?) -> Void) {
+  func getGamesOnSale(onCompletion completion: @escaping (_ isEmpty: Bool, _ errorOrNil: NSError?) -> Void) {
     let url = "https://switchsales.herokuapp.com/games/eshop-sales"
 //    let localhost = "http://localhost:3000/games/eshop-sales"
     
@@ -73,7 +74,6 @@ class GameViewModel {
         }
         
         self.gameList.accept(games)
-        tableView.reloadData()
         completion(data.isEmpty, nil)
         
       case .failure(let error):

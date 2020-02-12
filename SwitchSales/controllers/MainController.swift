@@ -12,11 +12,9 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-protocol MainDelegate {
+protocol MainControllerDelegate {
   
-  func didTapGame(forIndexPath indexPath: IndexPath,
-                  viewModel: GameViewModel,
-                  controller: MainController)
+  func didTapGame(forIndexPath indexPath: IndexPath, controller: MainController)
 }
 
 class MainController: UIViewController {
@@ -25,7 +23,7 @@ class MainController: UIViewController {
   
   var viewModel: GameViewModel? = nil
   
-  var delegate: MainDelegate? = nil
+  var delegate: MainControllerDelegate? = nil
   
   var isSearchBarHidden: Bool = true
   
@@ -102,10 +100,7 @@ class MainController: UIViewController {
       .rx
       .itemSelected
       .subscribe(onNext: { index in
-        guard let viewModel = self.viewModel else { return }
-        self.delegate?.didTapGame(forIndexPath: index,
-                                  viewModel: viewModel,
-                                  controller: self)
+        self.delegate?.didTapGame(forIndexPath: index, controller: self)
     }).disposed(by: disposeBag)
     
     searchTextField
@@ -149,7 +144,7 @@ extension MainController: StatefulTableDelegate {
   
   func statefulTable(_ tableView: StatefulTableView,
                      pullToRefreshCompletion completion: @escaping InitialLoadCompletion) {
-    self.viewModel?.getGamesOnSale(tableView: tableView, onCompletion: completion)
+    self.viewModel?.getGamesOnSale(onCompletion: completion)
   }
   
   func statefulTable(_ tableView: StatefulTableView,
